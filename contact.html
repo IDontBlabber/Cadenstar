@@ -344,7 +344,30 @@ if(slides.length){let i=0,t;const show=n=>{i=(n+slides.length)%slides.length;sli
 const stats=document.querySelectorAll('.stat');
 if(stats.length){const so=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target.querySelector('strong');if(!el||el.dataset.done)return;el.dataset.done=1;const m=el.textContent.match(/\d+/);if(!m)return;const target=+m[0],st=performance.now(),tick=n=>{const p=Math.min((n-st)/900,1);el.textContent=Math.floor(p*target)+'+';if(p<1)requestAnimationFrame(tick);else el.classList.add('counting')};requestAnimationFrame(tick);so.unobserve(e.target)}),{threshold:.45});stats.forEach(s=>so.observe(s))}
 const form=document.getElementById('contactForm');
-if(form)form.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(form),subject=encodeURIComponent('CadenStar Project Enquiry - '+(d.get('service')||'BIM Services')),body=encodeURIComponent('Name: '+d.get('name')+'\nCompany: '+d.get('company')+'\nEmail: '+d.get('email')+'\nPhone: '+(d.get('phone')?(document.getElementById('phoneCode').value+' '+d.get('phone')):'')+'\nService: '+d.get('service')+'\n\nProject Brief:\n'+d.get('message'));location.href='mailto:cadenstar.shamala@gmail.com?subject='+subject+'&body='+body;const m=document.getElementById('formMsg');if(m)m.textContent='Opening your email client to send the enquiry…'});
+if(form)form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const m=document.getElementById('formMsg');
+  const btn=form.querySelector('button[type="submit"]');
+  if(btn){btn.disabled=true;btn.style.opacity='0.7';}
+  if(m)m.textContent='Sending your enquiry…';
+  try{
+    const response=await fetch('https://api.web3forms.com/submit',{method:'POST',body:new FormData(form)});
+    const result=await response.json();
+    if(result.success){
+      if(m)m.textContent='Thank you! Your enquiry has been submitted successfully.';
+      form.reset();
+      const code=document.getElementById('ccCode'); if(code)code.textContent='Select';
+      const flag=document.getElementById('ccFlag'); if(flag){flag.src='';flag.style.display='none';}
+      const phoneCode=document.getElementById('phoneCode'); if(phoneCode)phoneCode.value='';
+    }else{
+      if(m)m.textContent='Something went wrong. Please try again.';
+    }
+  }catch(err){
+    if(m)m.textContent='Unable to send the enquiry. Please try again.';
+  }finally{
+    if(btn){btn.disabled=false;btn.style.opacity='';}
+  }
+});
 })();
   </script>
 </body>
