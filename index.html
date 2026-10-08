@@ -328,8 +328,8 @@
         </a>
 </li>
 <li>
-<a href="mailto:cadenstar.shamala@gmail.com">
-         cadenstar.shamala@gmail.com
+<a href="mailto:shamalalokesh@cadenstar.com">
+         shamalalokesh@cadenstar.com
         </a>
 </li>
 <li>
@@ -360,7 +360,7 @@ if(slides.length){let i=0,t;const show=n=>{i=(n+slides.length)%slides.length;sli
 const stats=document.querySelectorAll('.stat');
 if(stats.length){const so=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target.querySelector('strong');if(!el||el.dataset.done)return;el.dataset.done=1;const m=el.textContent.match(/\d+/);if(!m)return;const target=+m[0],st=performance.now(),tick=n=>{const p=Math.min((n-st)/900,1);el.textContent=Math.floor(p*target)+'+';if(p<1)requestAnimationFrame(tick);else el.classList.add('counting')};requestAnimationFrame(tick);so.unobserve(e.target)}),{threshold:.45});stats.forEach(s=>so.observe(s))}
 const form=document.getElementById('contactForm');
-if(form)form.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(form),subject=encodeURIComponent('CadenStar Project Enquiry - '+(d.get('service')||'BIM Services')),body=encodeURIComponent('Name: '+d.get('name')+'\nCompany: '+d.get('company')+'\nEmail: '+d.get('email')+'\nPhone: '+d.get('phone')+'\nService: '+d.get('service')+'\n\nProject Brief:\n'+d.get('message'));location.href='mailto:cadenstar.shamala@gmail.com?subject='+subject+'&body='+body;const m=document.getElementById('formMsg');if(m)m.textContent='Opening your email client to send the enquiry…'});
+if(form)form.addEventListener('submit',e=>{e.preventDefault();const d=new FormData(form),subject=encodeURIComponent('CadenStar Project Enquiry - '+(d.get('service')||'BIM Services')),body=encodeURIComponent('Name: '+d.get('name')+'\nCompany: '+d.get('company')+'\nEmail: '+d.get('email')+'\nPhone: '+d.get('phone')+'\nService: '+d.get('service')+'\n\nProject Brief:\n'+d.get('message'));location.href='mailto:shamalalokesh@cadenstar.com?subject='+subject+'&body='+body;const m=document.getElementById('formMsg');if(m)m.textContent='Opening your email client to send the enquiry…'});
 })();
   </script>
 </body>
